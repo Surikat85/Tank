@@ -15,7 +15,7 @@ function Tank (model) {
     
     // main methods of the tank object
     function init() {
-        
+        //TODO;
     }
     init();
     

@@ -3,7 +3,19 @@ html, body {
 	margin: 0;
 }
 
-#canvas {
+body {
+    background-color: #E3E3E3;
+}
+
+#area {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    border: 2px solid #333;
+    background-color: #EEE;
+}
+
+/*#canvas {
 	width: 128px;
 	height: 320px;
 	left: 100px;
@@ -22,6 +34,6 @@ html, body {
 	background-image: url("../images/tank.jpeg");
 	-moz-transform: rotate(-2.3deg);
 	opacity: 0.7;
-}
+}*/
 
 

@@ -6,7 +6,9 @@ var UTIL = {
             console.err("Invalid arguments");
             return;
         }
-        var F = function() { };
+        var F = function() {
+            console.log("f");
+        };
         F.prototype = Parent.prototype;
         Child.prototype = new F();
         Child.prototype.constructor = Child;

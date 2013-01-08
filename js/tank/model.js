@@ -7,7 +7,7 @@ function Model (type) {
         console.error(" model type is undefined ");
         return;
     }
-    console.log(global);
+    // console.log(global);
     // properties of the model object
     
     // inner methods
@@ -18,7 +18,7 @@ function Model (type) {
             WIDTH = 128,
             canvas = document.getElementById("canvas"),
             ctx = canvas.getContext("2d");
-    
+
         if(ctx){
             ctx.lineWidth = 1;
             
@@ -71,7 +71,7 @@ function Model (type) {
 		ctx.lineTo(95, 89);
 		
 		// left flank
-		ctx.moveTo(31, 126)
+		ctx.moveTo(31, 126);
 		ctx.lineTo(31, 298);
 		ctx.lineTo(10, 298);
 		ctx.lineTo(10, 126);
