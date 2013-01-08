@@ -1,0 +1,21 @@
+//загружаем рисунок
+BufferedImage img = PictureProcessor.getBufferedImage(stored);
+//создаем черно-белый рисунок
+BufferedImage img1 = new BufferedImage(img.getWidth(), img.getHeight(),
+        BufferedImage.TYPE_BYTE_GRAY);
+//удаляем информацию о цвете
+new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_GRAY),
+        null).filter(img, img1);
+//увеличиваем контрастность
+new LookupOp(new ByteLookupTable(0,thresholdTable),
+        null).filter(img1, img1);
+//сохраняем полученный рисунок
+try {
+    DBEdit.setTechCart(insKartName, insKartEncl, insKartRevz, img1);
+}catch (Exception e) {
+    FacesMessage msg = new FacesMessage("Ошибка" + e.getMessage());
+    FacesContext.getCurrentInstance().addMessage(null, msg);
+}
+
+FacesMessage msg = new FacesMessage("Изображение успешно сохранено");
+FacesContext.getCurrentInstance().addMessage(null, msg);
