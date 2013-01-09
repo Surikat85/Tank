@@ -33,6 +33,9 @@
 	</head>
 
 	<body>
-	   
+	    <div id="area">
+            <canvas id="canvas" width="128" height="320"></canvas>
+		</div>
+<!-- 		<div id="wrapper"></div> -->
 	</body>
 </html>
