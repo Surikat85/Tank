@@ -18,7 +18,7 @@ function Viewport () {
     
     //
     //
-    // main methods of the tank object
+    // main methods
     //
     //
 
@@ -44,29 +44,42 @@ function Viewport () {
     
     //supplementary method for easing area design
     function setGrid(){
-        var grid = document.createElement("TABLE"),
-            rows = integerDivision(height, CELL),
-            columns = integerDivision(width, CELL),
-            r=0,
-            c=0;
-        grid.setAttribute("style", "position: absolute;" + 
-                "top: " + TOP_SHIFT/2 + "px;" + 
-                "left: " + LEFT_SHIFT/2 + "px;" + 
-                "z-index: 20;" 
+        var grid = document.createElement("CANVAS"),
+            gridHeight = getHeight() - TOP_SHIFT,
+            gridWidth = getWidth() - TOP_SHIFT,
+            ctx,
+            rowPosition = CELL,
+            columnPosition = CELL;
+
+        grid.setAttribute("id", "grid");
+        grid.setAttribute("height", gridHeight);
+        grid.setAttribute("width", gridWidth);
+        grid.setAttribute("style",
+                " z-index: 20;" +
+                " position: absolute;" + 
+                " top: 18px;" +
+                " left: 18px;"
         );
-        grid.setAttribute("border", "1");
-        console.log(rows);
-        for (r=0; r < rows; r++) {
-            var tr = document.createElement("TR");
-            for (c=0; c < columns; c++) {
-                var td = document.createElement("TD");
-                td.setAttribute("width", CELL);
-                td.setAttribute("height", CELL);
-                tr.appendChild(td);
-            }
-            grid.appendChild(tr);
-        }
+
         document.body.appendChild(grid);
+        ctx = grid.getContext("2d");
+
+        if(ctx){
+            ctx.lineWidth = 0.1;
+            //drawing columns
+            while (columnPosition < gridWidth) {
+                ctx.moveTo(columnPosition, 0);
+                ctx.lineTo(columnPosition, gridHeight);
+                columnPosition = columnPosition + CELL;
+            }
+            // drawing rows
+            while (rowPosition < gridHeight) {
+                ctx.moveTo(0, rowPosition);
+                ctx.lineTo(gridWidth, rowPosition);
+                rowPosition = rowPosition + CELL;
+            }
+            ctx.stroke();
+        }
     }
     
     // 
@@ -97,16 +110,21 @@ function Viewport () {
                 " height: " + (height - TOP_SHIFT) + "px;" + 
                 " z-index: 10;" 
         );
-        document.body.appendChild(place);        
+        document.body.appendChild(place);
+
+        if(global.devMode()){
+            setGrid();            
+        }
     }
     init();
-    setGrid();
+
 
     return {
         getTitle: getTitle,
         getDescription: getDescription,
         getHeight: getHeight,
         getWidth: getWidth,
+        init: init,
         toString: toString
     };
 }
