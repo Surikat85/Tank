@@ -8,49 +8,49 @@ function Tank (model) {
     }
     
     // main properties of the tank object
-    var title = 'Astronomy Cast',
-        description = 'A fact-based journey through the galaxy.',
-        link = 'http://www.astronomycast.com';
-    
+    var tank;
     
     // main methods of the tank object
     function init() {
-        //TODO;
+        tank = model;
     }
     init();
     
+    function turnLeft(){
+        var canvas = tank.getCanvas();
+    }
+
+    function turnRight(){
+        tank.setAngle(tank.getPosition.angle + 15);
+    }
     
-    function getTitle() {
-        return title;
+    function moveForward(){
+        tank.setAngle(tank.getPosition.angle - 15);
     }
-
-    function getDescription() {
-        return description;
+    
+    function moveBackward(){
+        
     }
-
-    function getLink() {
-        return link;
+    
+    // returns objects canvas     
+    function getFrame(){
+        if(!tank.getCanvas()){
+            console.error("no canvas found !!! ");
+        }
+        return tank.getCanvas();
     }
 
     function toString() {
-        // Now we can safely rely on the getTitle() accessor as well.
-        return 'Title: ' + getTitle();
-    }
-
-    function download() {
-        // Some highly resilient implementation ...
-    }   
-
-    function reliesOnDownload() {
-       // Relies on our own implementation of the download() method
-       download(); 
+        // TODO: improve 
+        return 'Model: ' + tank;
     }
     
     return {
-        getTitle: getTitle,
-        getDescription: getDescription,
-        getLink: getLink,
-        toString: toString,
-        download: download
+        turnLeft: turnLeft,
+        turnRight: turnRight,
+        moveForward: moveForward,
+        moveBackward: moveBackward,
+        getFrame: getFrame,
+        toString: toString
     };
 }

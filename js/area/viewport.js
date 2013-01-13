@@ -1,4 +1,4 @@
-/*globals console, integerDivision*/
+/*globals global, console, integerDivision*/
 function Viewport () {
     "use strict";
     
@@ -10,6 +10,7 @@ function Viewport () {
     
     var title = 'Viewport',
         description = 'The main viewport',
+        place,
         height = 0,
         width = 0,
         TOP_SHIFT = 30,
@@ -38,8 +39,27 @@ function Viewport () {
         return width;
     }
     
-    function toString() {
-        return 'width: ' + getWidth() + " height: " + getHeight;
+    function getPlace() {
+        return place;
+    }
+    
+    function addUnit(unit, position){
+        if(!unit){
+            console.error("no unit found !!! ");
+            return;
+        }
+        
+        if(!unit.getFrame()){
+            console.error("no canvas found !!! ");
+        }
+        
+        if(!position){
+            position = {top: 0, left: 0};
+        }
+        
+        var p = getPlace();
+        p.appendChild(unit.getFrame());
+        
     }
     
     //supplementary method for easing area design
@@ -81,6 +101,10 @@ function Viewport () {
             ctx.stroke();
         }
     }
+
+    function toString() {
+        return 'width: ' + getWidth() + " height: " + getHeight;
+    }
     
     // 
     //
@@ -89,10 +113,11 @@ function Viewport () {
     //
     
     function init() {
-        var body = document.body,
-            place = document.createElement("DIV");
-
+        var body = document.body;
         body.innerHTML = "";
+
+        place = document.createElement("DIV");
+        
         width = Math.max(document.documentElement.clientWidth,
                          document.body.scrollWidth,
                          document.documentElement.scrollWidth,
@@ -111,19 +136,21 @@ function Viewport () {
                 " z-index: 10;" 
         );
         document.body.appendChild(place);
-
+        
+        global.setArea(place, getHeight(), getWidth());
+        
         if(global.devMode()){
             setGrid();            
         }
     }
     init();
 
-
     return {
         getTitle: getTitle,
         getDescription: getDescription,
         getHeight: getHeight,
         getWidth: getWidth,
+        addUnit: addUnit,
         init: init,
         toString: toString
     };

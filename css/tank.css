@@ -1,0 +1,9 @@
+/* player styles: 
+ * tanks,
+ * turrets,
+ * bullets etc.
+ */
+.t-movable {
+    position: absolute;
+    z-index: 30;
+}
