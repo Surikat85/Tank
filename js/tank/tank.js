@@ -16,20 +16,32 @@ function Tank (model) {
     }
     init();
     
-    function turnLeft(){
-        var canvas = tank.getCanvas();
+    function turnLeft() {
+        tank.setPosition({angle: tank.getPosition().angle - 1});
     }
 
-    function turnRight(){
-        tank.setAngle(tank.getPosition.angle + 15);
+    function turnRight() {
+        tank.setPosition({angle: tank.getPosition().angle + 1});
     }
     
-    function moveForward(){
-        tank.setAngle(tank.getPosition.angle - 15);
+    function moveForward() {
+        //TODO improve
+        var ds = 1,
+            alpha = tank.getPosition().angle,
+            dx = ds * Math.sin(alpha),
+            dy = ds * Math.cos(alpha);
+              
+        tank.setPosition({angle: alpha, top: tank.getPosition().top - dy, left: tank.getPosition().left - dx});
     }
     
     function moveBackward(){
-        
+        //TODO improve
+        var ds = 1,
+            alpha = tank.getPosition().angle,
+            dx = ds * Math.sin(alpha),
+            dy = ds * Math.cos(alpha);
+              
+        tank.setPosition({angle: alpha, top: tank.getPosition().top + dy, left: tank.getPosition().left + dx});
     }
     
     // returns objects canvas     

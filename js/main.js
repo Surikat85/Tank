@@ -23,6 +23,38 @@ function Main (global) {
             area.init();
         };
         area.addUnit(player);
+        
+        document.body.onkeydown = function(evt) {
+            // TODO add multi thread support. For now, button press function will stop other actions implementation
+            if(evt && evt.keyCode) {
+                var keyCode = evt.keyCode;
+                if(keyCode === 38) {
+                    player.moveForward();
+                    return;
+                }
+                
+                if(keyCode === 40) {
+                    player.moveBackward();
+                    return;
+                }
+
+                if(keyCode === 39) {
+                    player.turnRight();
+                    return;
+                }
+
+                if(keyCode === 37) {
+                    player.turnLeft();
+                    return;
+                }
+            }
+        };
+        
+        // document.body.onkeyup = function(evt) {
+            // if(evt && evt.keyCode) {
+                // var keyCode = evt.keyCode;
+            // }
+        // };
        
     }
     

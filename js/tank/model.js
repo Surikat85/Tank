@@ -123,11 +123,27 @@ function Model (type) {
     }
     
     function setPosition(value){
-        if(!value){
-            value = {angle: 0, top: 0, left: 0};
-        }
-        position.angle = value;
         
+        if(!value){
+            value = {angle: getPosition().angle, top: getPosition().top, left: getPosition().left};
+        }
+
+        if(value.top === undefined) {
+            value.top = getPosition().top;
+        }
+
+        if(value.left === undefined) {
+            value.left = getPosition().left;
+        }
+
+        if(value.angle === undefined) {
+            console.log("adfadf");
+            value.angle = getPosition().angle;
+        }
+        position.angle = value.angle;
+        position.top = value.top;
+        position.left = value.left;
+
         var canvas = getCanvas();
         if(!canvas){
             console.error(" no canvas found !!!");
@@ -139,9 +155,10 @@ function Model (type) {
                 "-ms-transform: rotate(" + value.angle + "deg); " +
                 "-webkit-transform: rotate(" + value.angle + "deg); " +
                 "-o-transform: rotate(" + value.angle + "deg); " +
-                " transform: rotate(" + value.angle + "deg); "
+                " transform: rotate(" + value.angle + "deg); " + 
+                " top: " + value.top + "px; " +
+                " left: " + value.left + "px; "
         );
-
         // filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678, sizingMethod='auto expand');
 
     }
@@ -159,7 +176,7 @@ function Model (type) {
     
     function init() {
         draw();
-        setPosition();
+        position = {angle: 0, top: 0, left: 0};
     }
     init();
 
