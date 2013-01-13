@@ -24,6 +24,25 @@ function Main (global) {
         };
         area.addUnit(player);
         
+        document.onmousedown = function(evt) {
+            evt.preventDefault();
+            evt.stopPropagation();
+
+            if(evt.buttons === 1) {
+                player.turnLeft();
+                return;
+            }
+            if(evt.buttons === 2) {
+                player.turnRight();
+                return;
+            }
+        };
+        // document.onmouseup = function(evt) {
+            // if(evt.buttons === 2) {
+                
+            // }
+        // };
+        
         document.body.onkeydown = function(evt) {
             // TODO add multi thread support. For now, button press function will stop other actions implementation
             if(evt && evt.keyCode) {

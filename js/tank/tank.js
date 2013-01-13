@@ -31,7 +31,7 @@ function Tank (model) {
             dx = ds * Math.sin(alpha),
             dy = ds * Math.cos(alpha);
               
-        tank.setPosition({angle: alpha, top: tank.getPosition().top - dy, left: tank.getPosition().left - dx});
+        tank.setPosition({angle: alpha, top: tank.getPosition().top - dx, left: tank.getPosition().left - dy});
     }
     
     function moveBackward(){
